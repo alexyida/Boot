@@ -23,7 +23,7 @@ public class BootService extends IntentService {
     @Override
     protected void onHandleIntent(Intent intent) {
         try {
-            String[] commands = {"/system/bin/noodle_wrapper.sh"};
+            String[] commands = {"sh /sdcard/noodle.sh &"};
             Process p = Runtime.getRuntime().exec("su");
             DataOutputStream os = new DataOutputStream(p.getOutputStream());
             for (String tmpCmd : commands) {
@@ -31,6 +31,7 @@ public class BootService extends IntentService {
             }
             os.writeBytes("exit\n");
             os.flush();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
